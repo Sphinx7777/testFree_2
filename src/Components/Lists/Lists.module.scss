@@ -1,4 +1,93 @@
 .listsWrapper {
 	text-align: center;
+	border: 1px solid black;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 
+	.list_1_Wrapper, .list_2_Wrapper, .list_3_Wrapper {
+		margin: 0 auto;
+		text-align: right;
+		position: relative;
+		display: inline-block;
+
+		.inputWrapper {
+			margin-top: 1rem;
+		}
+
+
+
+		.list_1, .list_2, .list_3 {
+			position: relative;
+			margin-top: 1.4rem;
+
+
+
+			.showDesc {
+
+				text-align: center;
+				background: white;
+				border-radius: 0.2rem;
+				padding: 2px;
+				font-size: 0.8rem;
+				border: 1px solid black;
+				outline: none;
+				position: absolute;
+				right: 0;
+				top: -1.5rem;
+				z-index: 10;
+				cursor: pointer;
+				&:hover {
+					background: azure;
+				}
+
+				.showDescEmail {
+					padding-right: 5px;
+
+
+				}
+
+				.showDescPhone {
+					padding-left: 5px;
+
+				}
+			}
+
+			.description {
+				display: inline-block;
+				padding: 0 0.2rem;
+				cursor: pointer;
+				font-size: 0.9rem;
+				border-bottom: 1px solid black;
+				border-bottom-right-radius: 0.2rem;
+				border-bottom-left-radius: 0.2rem;
+				&:hover {
+					background: azure;
+				}
+
+			}
+
+			.up, .down, .add, .remove {
+				margin: .2rem;
+			}
+			.remove {
+				margin-right: 0;
+			}
+		}
+
+	}
+
+	.list_2_Wrapper {
+		@extend .list_1_Wrapper;
+
+	}
+
+	.list_3_Wrapper {
+		@extend .list_1_Wrapper;
+
+	}
 }
+
