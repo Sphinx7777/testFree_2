@@ -8,7 +8,7 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 
-	.list_1_Wrapper, .list_2_Wrapper, .list_3_Wrapper {
+	.listWrapper {
 		margin: 0 auto;
 		text-align: right;
 		position: relative;
@@ -18,45 +18,47 @@
 			margin-top: 1rem;
 		}
 
-
-
-		.list_1, .list_2, .list_3 {
+		.list {
 			position: relative;
 			margin-top: 1.4rem;
 
-
-
 			.showDesc {
-
 				text-align: center;
 				background: white;
 				border-radius: 0.2rem;
 				padding: 2px;
-				font-size: 0.8rem;
+				font-size: 0.9rem;
 				border: 1px solid black;
 				outline: none;
 				position: absolute;
 				right: 0;
+				left: -2rem;
 				top: -1.5rem;
 				z-index: 10;
 				cursor: pointer;
+
 				&:hover {
 					background: azure;
 				}
 
 				.showDescEmail {
 					padding-right: 5px;
-
-
 				}
 
 				.showDescPhone {
 					padding-left: 5px;
-
+				}
+				.closeDesc {
+					color: red;
+					padding: 5px;
+					cursor: pointer;
+					position: absolute;
+					bottom: -.5rem;
+					right: -1.2rem;
 				}
 			}
 
-			.description {
+			.descName {
 				display: inline-block;
 				padding: 0 0.2rem;
 				cursor: pointer;
@@ -64,30 +66,20 @@
 				border-bottom: 1px solid black;
 				border-bottom-right-radius: 0.2rem;
 				border-bottom-left-radius: 0.2rem;
+
 				&:hover {
 					background: azure;
 				}
-
 			}
 
-			.up, .down, .add, .remove {
+			.up, .add, .remove {
 				margin: .2rem;
 			}
+
 			.remove {
 				margin-right: 0;
 			}
 		}
-
-	}
-
-	.list_2_Wrapper {
-		@extend .list_1_Wrapper;
-
-	}
-
-	.list_3_Wrapper {
-		@extend .list_1_Wrapper;
-
 	}
 }
 

@@ -4,18 +4,17 @@
 	right: 1.6rem;
 	background: white;
 	border: 1px solid black;
-z-index: 20;
-
+	z-index: 20;
 
 	.settingsForm {
 
 		.sendBtns {
-text-align: left;
+			text-align: left;
+
 			.sendBtn {
 				margin: 0 5px;
 			}
 		}
-
 	}
 
 	.closeForm {
@@ -29,5 +28,4 @@ text-align: left;
 		bottom: 0;
 		right: 0.5rem;
 	}
-
 }

@@ -17,7 +17,6 @@ class App extends Component {
 		return (
 			<div className={s.app}>
 				<Lists
-					listsArr={this.props.listsArr}
 					editMode={this.props.editMode}
 					listsArr1={this.props.listsArr1}
 					listsArr2={this.props.listsArr2}
@@ -35,8 +34,8 @@ class App extends Component {
 }
 
 export default connect(state => ({
-	listsArr: state.lists.listsArr,
 	editMode: state.lists.editMode,
+	listsArr: state.lists.listsArr,
 	listsArr1: state.lists.listsArr[0],
 	listsArr2: state.lists.listsArr[1],
 	listsArr3: state.lists.listsArr[2],
