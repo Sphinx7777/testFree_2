@@ -9,7 +9,7 @@ const maxLength15 = maxLengthCreator(15);
 
 const ContactForm = (props) => {
 
-	const {handleSubmit, pristine, submitting, toggleForm, list, id} = props;
+	const {handleSubmit, pristine, submitting, toggleForm, id} = props;
 
 	return (
 		<div className={s.settingsFormWrapper}>
@@ -52,7 +52,7 @@ const ContactForm = (props) => {
 					</div>
 				</div>
 			</form>
-			<span className={s.closeForm} onClick={() => toggleForm({id, list})}>X</span>
+			<span className={s.closeForm} onClick={() => toggleForm(id)}>X</span>
 		</div>
 	)
 };

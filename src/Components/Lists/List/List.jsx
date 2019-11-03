@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {ListItem} from "./ListItem";
 
+
 export const List = ({
-											 listsArray, setShowDescription, setRemoveDescription, listArr,
+											 listsArray, setShowDescription, setRemoveDescription, numberArr,
 											 addNewField, editMode, setShowFormEdit, setChangeContent,
-											 setChangeItemOrder
+											 setChangeItemOrder, setNewList, setRemoveSublist
 										 }) => {
 
 	const [desc, setDesc] = useState(listsArray);
-	const [IdAndArrNumber, setNewIdAndArrNumber] = useState(null);
+	const [Id, setId] = useState(null);
+
 
 	useEffect(() => {
 		setDesc(listsArray)
@@ -19,34 +21,48 @@ export const List = ({
 			name: formData.name,
 			phone: formData.phone,
 			email: formData.email,
-			list: IdAndArrNumber.list,
-			id: IdAndArrNumber.id
+			numberArr,
+			id: Id
 		};
 		setChangeContent(newContentForSubmit);
 	};
 
-	const setIdAndArrNumber = (date) => {
-		setNewIdAndArrNumber(date)
+
+	const createSublist = (id) => {
+		const newSubList = {
+			sublist: [
+				{
+					id: id,
+					name: 'new',
+					phone: '',
+					email: '',
+					showDesc: false,
+					showForm: false
+				}
+			]
+		};
+		setNewList({newSubList, id, numberArr})
 	};
 
-	const toggleForm = (date) => {
-		setIdAndArrNumber(date);
-		setShowFormEdit(date)
+
+	const toggleForm = (id) => {
+		setId(id);
+		setShowFormEdit({id, numberArr})
 
 	};
-	const changeItemOrder = (i, listArr) => {
-		[desc[i], desc[i + 1]] = [desc[i + 1], desc[i]];
+	const changeItemOrder = (index, numberArr) => {
+		[desc[index], desc[index + 1]] = [desc[index + 1], desc[index]];
 		const newArray = desc.filter(d => d);
-		setChangeItemOrder({newArray, list: listArr})
+		setChangeItemOrder({newArray, numberArr})
 	};
 
 	return (
 		<>
-		<ListItem {...{
-			setShowDescription, setRemoveDescription, listArr,
-			addNewField, editMode, desc, toggleForm, onSubmit,
-			changeItemOrder
-		}} />
+			<ListItem {...{
+				setShowDescription, setRemoveDescription, numberArr,
+				addNewField, editMode, desc, toggleForm, onSubmit,
+				changeItemOrder, createSublist, setRemoveSublist
+			}} />
 		</>
 	);
 };

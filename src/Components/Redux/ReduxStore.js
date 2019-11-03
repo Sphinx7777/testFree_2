@@ -20,4 +20,3 @@ const store = createStore(reducers, compose(
 
 
 export default store;
-window.store = store;

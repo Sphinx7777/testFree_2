@@ -6,6 +6,8 @@ const REMOVE_DESCRIPTION = '/listsReducer///REMOVE_DESCRIPTION';
 const ADD_NEW_FIELD = '/listsReducer///ADD_NEW_FIELD';
 const SET_CHANGE_CONTENT = '/listsReducer///SET_CHANGE_CONTENT';
 const SET_CHANGE_ITEM_ORDER = '/listsReducer///SET_CHANGE_ITEM_ORDER';
+const SET_NEW_SUBLIST = '/listsReducer///SET_NEW_SUBLIST';
+const REMOVE_SUBLIST = '/listsReducer///REMOVE_SUBLIST';
 
 
 let data = load({namespace: 'lists'});
@@ -15,7 +17,8 @@ if (!initialState || !initialState.listsArr || !initialState.listsArr.length) {
 	initialState = {
 		listsArr: [
 
-			[{id: 1, name: '1', phone: '111 11 11 11', email: '111@gmail.com', showDesc: false, showForm: false},
+			[
+				{id: 1, name: '1', phone: '111 11 11 11', email: '111@gmail.com', showDesc: false, showForm: false},
 				{id: 2, name: '11', phone: '111 11 11 11', email: '111@gmail.com', showDesc: false, showForm: false},
 				{id: 3, name: '111', phone: '111 11 11 11', email: '111@gmail.com', showDesc: false, showForm: false}
 			]
@@ -33,7 +36,7 @@ if (!initialState || !initialState.listsArr || !initialState.listsArr.length) {
 			,
 		],
 
-		addNewFieldStatus: false,
+		editField: false,
 		editMode: false
 	};
 }
@@ -43,55 +46,87 @@ const listsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SHOW_DESCRIPTION: {
 			return {
-				...state, ...state.listsArr[action.list] = state.listsArr[action.list].map(list => {
-					if (list.id === action.id) {
-						list.showDesc = !list.showDesc;
+				...state, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+							list.showDesc = !list.showDesc;
+							return list;
+						}
 						return list;
-					}
-					return list;
-				})
+					})
 			}
 		}
 		case SHOW_FORM_EDIT: {
 			return {
-				...state, ...state.listsArr[action.list] = state.listsArr[action.list].map(list => {
-					if (list.id === action.id) {
-						list.showForm = !list.showForm;
+				...state, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+							list.showForm = !list.showForm;
+							return list;
+						}
 						return list;
-					}
-					return list;
-				}), editMode: !state.editMode
+					}), editMode: !state.editMode
 			}
 		}
 		case SET_CHANGE_CONTENT: {
 			return {
-				...state, ...state.listsArr[action.list] = state.listsArr[action.list].map(list => {
-					if (list.id === action.id) {
-						list.email = action.email;
-						list.name = action.name;
-						list.phone = action.phone;
-						list.showForm = false;
+				...state, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+							list.email = action.email;
+							list.name = action.name;
+							list.phone = action.phone;
+							list.showForm = false;
+							return list;
+						}
 						return list;
-					}
-					return list;
-				}), editMode: false
+					}), editMode: false
 			}
 		}
 		case REMOVE_DESCRIPTION: {
 			return {
-				...state, ...state.listsArr, ...state.listsArr[action.list] = state.listsArr[action.list].filter(list => list.id !== action.id
-				)
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].filter(list => list.id !== action.id
+					)
 			}
 		}
 		case ADD_NEW_FIELD: {
 			return {
-				...state, ...state.listsArr, ...state.listsArr[action.list].push(action.newField),
-				addNewFieldStatus: !state.addNewFieldStatus
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr].push(action.newField),
+				editField: !state.editField
 			}
 		}
 		case SET_CHANGE_ITEM_ORDER: {
 			return {
-				...state, ...state.listsArr, ...state.listsArr[action.list]=action.newArray
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr] = action.newArray
+			}
+		}
+		case SET_NEW_SUBLIST: {
+			return {
+				...state, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+							Object.assign(list, action.newSubList);
+							return list;
+						}
+						return list;
+					}), editMode: false
+			}
+		}
+		case REMOVE_SUBLIST: {
+			return {
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+
+							list.sublist = list.sublist.filter(sub => sub.id !== action.id);
+							if (!list.sublist.length) {
+								list.sublist = false
+							}
+							return list
+						}
+						return list
+					})
 			}
 		}
 		default:
@@ -106,6 +141,8 @@ export const setRemoveDescription = (date) => ({type: REMOVE_DESCRIPTION, ...dat
 export const addNewField = (date) => ({type: ADD_NEW_FIELD, ...date});
 export const setChangeContent = (date) => ({type: SET_CHANGE_CONTENT, ...date});
 export const setChangeItemOrder = (date) => ({type: SET_CHANGE_ITEM_ORDER, ...date});
+export const setNewList = (date) => ({type: SET_NEW_SUBLIST, ...date});
+export const setRemoveSublist = (date) => ({type: REMOVE_SUBLIST, ...date});
 
 
 export default listsReducer;
