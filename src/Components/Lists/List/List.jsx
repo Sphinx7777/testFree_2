@@ -5,11 +5,13 @@ import {ListItem} from "./ListItem";
 export const List = ({
 											 listsArray, setShowDescription, setRemoveDescription, numberArr,
 											 addNewField, editMode, setShowFormEdit, setChangeContent,
-											 setChangeItemOrder, setNewList, setRemoveSublist
+											 setChangeItemOrder, setNewList, setRemoveSublist,setShowDescriptionSublist,
+											 setShowFormEditSublist,setChangeContentSublist
 										 }) => {
 
 	const [desc, setDesc] = useState(listsArray);
 	const [Id, setId] = useState(null);
+	const [isSublist, setIsSublist] = useState(null);
 
 
 	useEffect(() => {
@@ -24,7 +26,10 @@ export const List = ({
 			numberArr,
 			id: Id
 		};
-		setChangeContent(newContentForSubmit);
+		!isSublist ?
+		setChangeContent(newContentForSubmit)
+			:
+			setChangeContentSublist(newContentForSubmit)
 	};
 
 
@@ -33,7 +38,7 @@ export const List = ({
 			sublist: [
 				{
 					id: id,
-					name: 'new',
+					name: 'newSublist',
 					phone: '',
 					email: '',
 					showDesc: false,
@@ -43,10 +48,16 @@ export const List = ({
 		};
 		setNewList({newSubList, id, numberArr})
 	};
-
-
-	const toggleForm = (id) => {
+	const toggleFormSublist = (id,isSublist) => {
 		setId(id);
+		setIsSublist(isSublist);
+		setShowFormEditSublist({id, numberArr})
+
+	};
+
+	const toggleForm = (id,isSublist) => {
+		setId(id);
+		setIsSublist(isSublist);
 		setShowFormEdit({id, numberArr})
 
 	};
@@ -59,8 +70,8 @@ export const List = ({
 	return (
 		<>
 			<ListItem {...{
-				setShowDescription, setRemoveDescription, numberArr,
-				addNewField, editMode, desc, toggleForm, onSubmit,
+				setShowDescription, setRemoveDescription, numberArr,setShowDescriptionSublist,
+				addNewField, editMode, desc, toggleForm, onSubmit,toggleFormSublist,
 				changeItemOrder, createSublist, setRemoveSublist
 			}} />
 		</>

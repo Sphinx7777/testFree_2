@@ -4,7 +4,8 @@ import {Lists} from "./Components/Lists/Lists";
 import {connect} from "react-redux";
 import {
 	addNewField, setRemoveDescription, setShowDescription, setShowFormEdit,
-	setChangeContent, setChangeItemOrder, setNewList, setRemoveSublist
+	setChangeContent, setChangeItemOrder, setNewList, setRemoveSublist, setShowDescriptionSublist,
+	setShowFormEditSublist, setChangeContentSublist
 } from "./Components/Redux/listsReducer";
 
 
@@ -13,7 +14,7 @@ class App extends React.PureComponent {
 	render() {
 		let {setShowDescription, setRemoveDescription, addNewField,
 			setShowFormEdit,setChangeContent,setChangeItemOrder,setNewList,
-			setRemoveSublist
+			setRemoveSublist,setShowDescriptionSublist,setShowFormEditSublist,setChangeContentSublist,
 		} = this.props;
 		return (
 			<div className={s.app}>
@@ -30,6 +31,9 @@ class App extends React.PureComponent {
 					setChangeItemOrder={setChangeItemOrder}
 					setNewList={setNewList}
 					setRemoveSublist={setRemoveSublist}
+					setShowDescriptionSublist={setShowDescriptionSublist}
+					setShowFormEditSublist={setShowFormEditSublist}
+					setChangeContentSublist={setChangeContentSublist}
 				/>
 			</div>
 		);
@@ -45,6 +49,7 @@ export default connect(state => ({
 
 
 }), {setShowDescription, setRemoveDescription, setChangeItemOrder,
-	addNewField, setShowFormEdit,setChangeContent,setNewList,setRemoveSublist
+	addNewField, setShowFormEdit,setChangeContent,setNewList,setRemoveSublist,
+	setShowDescriptionSublist,setShowFormEditSublist,setChangeContentSublist
 })(App);
 

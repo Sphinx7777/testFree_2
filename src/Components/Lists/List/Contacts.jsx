@@ -2,12 +2,18 @@ import React from 'react';
 import s from '../Lists.module.scss';
 
 
-export const Contacts = React.memo (({setShowDescription, numberArr, editMode, toggleForm,list}) => {
+export const Contacts = React.memo (({showDescription, numberArr, editMode, toggleForm,list,isSublist,toggleFormSublist}) => {
 
+	const setToggleForm = ()=>{
+		!isSublist ?
+			toggleForm(list.id,isSublist)
+			:
+			toggleFormSublist(list.id,isSublist)
+	};
 
 	return (
 		<div className={s.showDesc}
-				 onDoubleClick={() => !editMode && toggleForm(list.id)
+				 onDoubleClick={() => !editMode && setToggleForm(list.id)
 				 }>
 						  <span className={s.showDescEmail}>
 							✉ {list.email}
@@ -16,7 +22,7 @@ export const Contacts = React.memo (({setShowDescription, numberArr, editMode, t
 							✆ {list.phone}
 						  </span>
 			<span className={s.closeDesc}
-						onClick={() => !editMode && setShowDescription({
+						onClick={() => !editMode && showDescription({
 							status: !list.showDesc,
 							id: list.id,
 							numberArr

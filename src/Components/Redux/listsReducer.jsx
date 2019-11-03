@@ -8,6 +8,10 @@ const SET_CHANGE_CONTENT = '/listsReducer///SET_CHANGE_CONTENT';
 const SET_CHANGE_ITEM_ORDER = '/listsReducer///SET_CHANGE_ITEM_ORDER';
 const SET_NEW_SUBLIST = '/listsReducer///SET_NEW_SUBLIST';
 const REMOVE_SUBLIST = '/listsReducer///REMOVE_SUBLIST';
+const SET_SHOW_DESCRIPTION_SUBLIST = '/listsReducer///SET_SHOW_DESCRIPTION_SUBLIST';
+const SET_SHOW_FORM_EDIT_SUBLIST = '/listsReducer///SET_SHOW_FORM_EDIT_SUBLIST';
+const SET_CHANGE_CONTENT_SUBLIST = '/listsReducer///SET_CHANGE_CONTENT_SUBLIST';
+
 
 
 let data = load({namespace: 'lists'});
@@ -129,6 +133,72 @@ const listsReducer = (state = initialState, action) => {
 					})
 			}
 		}
+		case SET_SHOW_DESCRIPTION_SUBLIST: {
+			return {
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+
+							list.sublist = list.sublist.map(sub => {
+
+								if(sub.id === action.id){
+									sub.showDesc = !sub.showDesc
+								}
+							return sub
+
+						});
+
+							return list
+						}
+						return list
+					})
+			}
+		}
+		case SET_SHOW_FORM_EDIT_SUBLIST: {
+			return {
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+
+							list.sublist = list.sublist.map(sub => {
+
+								if(sub.id === action.id){
+									sub.showForm = !sub.showForm
+								}
+							return sub
+
+						});
+
+							return list
+						}
+						return list
+					}),editMode: !state.editMode
+			}
+		}
+		case SET_CHANGE_CONTENT_SUBLIST: {
+			return {
+				...state, ...state.listsArr, ...state.listsArr[action.numberArr] =
+					state.listsArr[action.numberArr].map(list => {
+						if (list.id === action.id) {
+
+							list.sublist = list.sublist.map(sub => {
+
+								if(sub.id === action.id){
+									sub.email = action.email;
+									sub.name = action.name;
+									sub.phone = action.phone;
+									sub.showForm = false;
+								}
+							return sub
+
+						});
+
+							return list
+						}
+						return list
+					}),editMode: false
+			}
+		}
 		default:
 			return state;
 	}
@@ -143,6 +213,14 @@ export const setChangeContent = (date) => ({type: SET_CHANGE_CONTENT, ...date});
 export const setChangeItemOrder = (date) => ({type: SET_CHANGE_ITEM_ORDER, ...date});
 export const setNewList = (date) => ({type: SET_NEW_SUBLIST, ...date});
 export const setRemoveSublist = (date) => ({type: REMOVE_SUBLIST, ...date});
+export const setShowDescriptionSublist = (date) => ({type: SET_SHOW_DESCRIPTION_SUBLIST, ...date});
+export const setShowFormEditSublist = (date) => ({type: SET_SHOW_FORM_EDIT_SUBLIST, ...date});
+export const setChangeContentSublist = (date) => ({type: SET_CHANGE_CONTENT_SUBLIST, ...date});
+
+
+
+
+
 
 
 export default listsReducer;
