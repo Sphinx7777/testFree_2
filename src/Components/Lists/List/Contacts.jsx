@@ -12,7 +12,7 @@ export const Contacts = React.memo (({showDescription, numberArr, editMode, togg
 	};
 
 	return (
-		<div className={s.showDesc}
+		<div className={s.showDesc} title='DoubleClick for edit'
 				 onDoubleClick={() => !editMode && setToggleForm(list.id)
 				 }>
 						  <span className={s.showDescEmail}>

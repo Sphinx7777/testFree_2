@@ -39,7 +39,7 @@ const showDescription = (date) => {
 								showDescription, numberArr, editMode, toggleForm, list,isSublist,toggleFormSublist
 							}} />
 						</>}
-						<div className={s.descName}
+						<div className={s.descName} title='DoubleClick for edit'
 								 onDoubleClick={() =>
 									 !editMode && showDescription({
 										 status: !list.showDesc,
