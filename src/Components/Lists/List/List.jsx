@@ -5,8 +5,8 @@ import {ListItem} from "./ListItem";
 export const List = ({
 											 listsArray, setShowDescription, setRemoveDescription, numberArr,
 											 addNewField, editMode, setShowFormEdit, setChangeContent,
-											 setChangeItemOrder, setNewList, setRemoveSublist,setShowDescriptionSublist,
-											 setShowFormEditSublist,setChangeContentSublist
+											 setChangeItemOrder, setNewList, setRemoveSublist, setShowDescriptionSublist,
+											 setShowFormEditSublist, setChangeContentSublist
 										 }) => {
 
 	const [desc, setDesc] = useState(listsArray);
@@ -27,7 +27,7 @@ export const List = ({
 			id: Id
 		};
 		!isSublist ?
-		setChangeContent(newContentForSubmit)
+			setChangeContent(newContentForSubmit)
 			:
 			setChangeContentSublist(newContentForSubmit)
 	};
@@ -48,14 +48,14 @@ export const List = ({
 		};
 		setNewList({newSubList, id, numberArr})
 	};
-	const toggleFormSublist = (id,isSublist) => {
+	const toggleFormSublist = (id, isSublist) => {
 		setId(id);
 		setIsSublist(isSublist);
 		setShowFormEditSublist({id, numberArr})
 
 	};
 
-	const toggleForm = (id,isSublist) => {
+	const toggleForm = (id, isSublist) => {
 		setId(id);
 		setIsSublist(isSublist);
 		setShowFormEdit({id, numberArr})
@@ -70,8 +70,8 @@ export const List = ({
 	return (
 		<>
 			<ListItem {...{
-				setShowDescription, setRemoveDescription, numberArr,setShowDescriptionSublist,
-				addNewField, editMode, desc, toggleForm, onSubmit,toggleFormSublist,
+				setShowDescription, setRemoveDescription, numberArr, setShowDescriptionSublist,
+				addNewField, editMode, desc, toggleForm, onSubmit, toggleFormSublist,
 				changeItemOrder, createSublist, setRemoveSublist
 			}} />
 		</>
