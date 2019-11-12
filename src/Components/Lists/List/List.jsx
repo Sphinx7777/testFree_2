@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {ListItem} from "./ListItem";
 
 
-export const List = ({
-											 listsArray, setShowDescription, setRemoveDescription, numberArr,
-											 addNewField, editMode, setShowFormEdit, setChangeContent,
-											 setChangeItemOrder, setNewList, setRemoveSublist, setShowDescriptionSublist,
-											 setShowFormEditSublist, setChangeContentSublist
-										 }) => {
+export const List = (
+	{
+		listsArray, setShowDescription, setRemoveDescription, numberArr,
+		addNewField, editMode, setShowFormEdit, setChangeContent,
+		setChangeItemOrder, setNewList, setRemoveSublist, setShowDescriptionSublist,
+		setShowFormEditSublist, setChangeContentSublist
+	}) => {
 
 	const [desc, setDesc] = useState(listsArray);
 	const [Id, setId] = useState(null);
@@ -26,7 +27,8 @@ export const List = ({
 			numberArr,
 			id: Id
 		};
-		!isSublist ?
+		!isSublist
+			?
 			setChangeContent(newContentForSubmit)
 			:
 			setChangeContentSublist(newContentForSubmit)
@@ -52,15 +54,14 @@ export const List = ({
 		setId(id);
 		setIsSublist(isSublist);
 		setShowFormEditSublist({id, numberArr})
-
 	};
 
 	const toggleForm = (id, isSublist) => {
 		setId(id);
 		setIsSublist(isSublist);
 		setShowFormEdit({id, numberArr})
-
 	};
+
 	const changeItemOrder = (index, numberArr) => {
 		[desc[index], desc[index + 1]] = [desc[index + 1], desc[index]];
 		const newArray = desc.filter(d => d);
@@ -69,11 +70,23 @@ export const List = ({
 
 	return (
 		<>
-			<ListItem {...{
-				setShowDescription, setRemoveDescription, numberArr, setShowDescriptionSublist,
-				addNewField, editMode, desc, toggleForm, onSubmit, toggleFormSublist,
-				changeItemOrder, createSublist, setRemoveSublist
-			}} />
+			<ListItem {...
+				{
+					setShowDescription,
+					setRemoveDescription,
+					numberArr,
+					setShowDescriptionSublist,
+					addNewField,
+					editMode,
+					desc,
+					toggleForm,
+					onSubmit,
+					toggleFormSublist,
+					changeItemOrder,
+					createSublist,
+					setRemoveSublist
+				}
+			}/>
 		</>
 	);
 };

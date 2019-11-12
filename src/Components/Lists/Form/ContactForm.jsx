@@ -9,10 +9,16 @@ const maxLength15 = maxLengthCreator(15);
 
 const ContactForm = (props) => {
 
-	const {handleSubmit, pristine, submitting, toggleForm,toggleFormSublist,isSublist, id} = props;
+	const
+		{
+			handleSubmit, pristine, submitting,
+			toggleForm, toggleFormSublist, isSublist,
+			id
+		} = props;
 
-	const setToggleForm =(id)=>{
-		!isSublist ?
+	const setToggleForm = (id) => {
+		!isSublist
+			?
 			toggleForm(id)
 			:
 			toggleFormSublist(id)
@@ -27,8 +33,8 @@ const ContactForm = (props) => {
 						type='text'
 						placeholder='Name'
 						maxLength='31'
-						component={InputComponent}
 						label='Name'
+						component={InputComponent}
 						validate={[emptyField, maxLength30]}
 					/>
 					<Field
@@ -36,8 +42,8 @@ const ContactForm = (props) => {
 						type='email'
 						placeholder='Email'
 						maxLength='31'
-						component={InputComponent}
 						label='Email'
+						component={InputComponent}
 						validate={[Email, maxLength30]}
 					/>
 					<Field
@@ -45,23 +51,34 @@ const ContactForm = (props) => {
 						type='tel'
 						placeholder='Phone'
 						maxLength='16'
-						component={InputComponent}
 						label='Phone'
+						component={InputComponent}
 						validate={[phoneNumber, maxLength15]}
 					/>
-					<div className={s.sendBtns}>
-						<button className={s.sendBtn} type="submit" disabled={pristine || submitting}>
+					<div className={s.sendBtnGroup}>
+						<button className={s.sendBtn}
+										type="submit"
+										disabled={pristine || submitting}>
 							To send
 						</button>
-						<button className={s.sendBtn} type="reset" disabled={pristine}>
+						<button className={s.sendBtn}
+										type="reset"
+										disabled={pristine}>
 							Reset
 						</button>
 					</div>
 				</div>
 			</form>
-			<span className={s.closeForm} onClick={() => setToggleForm(id)}>X</span>
+			<span className={s.closeForm}
+						onClick={() => setToggleForm(id)}>
+				X
+			</span>
 		</div>
 	)
 };
 
-export default reduxForm({form: 'settingsForm', enableReinitialize: true})(ContactForm)
+export default reduxForm(
+	{
+		form: 'settingsForm',
+		enableReinitialize: true
+	})(ContactForm)
